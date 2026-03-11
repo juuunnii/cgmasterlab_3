@@ -1,4 +1,4 @@
-﻿#include <vector>
+#include <vector>
 #include <cmath>
 #include <cstdlib>
 #include <limits>
@@ -9,107 +9,95 @@
 #include "camera.h"
 #include "geometry.h"
 
-Model* g_model = nullptr;
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 800;
-const int DEPTH_MAX = 255;
+Model* model = NULL;
+const int width = 800;
+const int height = 800;
+const int depth = 255;
 
-Matrix create_viewport_matrix(int x, int y, int w, int h) {
-    Matrix viewport = Matrix::create_identity(4);
-    viewport[0][3] = x + w / 2.f;
-    viewport[1][3] = y + h / 2.f;
-    viewport[2][3] = DEPTH_MAX / 2.f;
+// фоновое изображение
+TGAImage background;
 
-    viewport[0][0] = w / 2.f;
-    viewport[1][1] = h / 2.f;
-    viewport[2][2] = DEPTH_MAX / 2.f;
+Matrix create_viewport(int x, int y, int w, int h) {
+    Matrix m = Matrix::create_identity(4);
+    m[0][3] = x + w / 2.f;
+    m[1][3] = y + h / 2.f;
+    m[2][3] = depth / 2.f;
 
-    return viewport;
+    m[0][0] = w / 2.f;
+    m[1][1] = h / 2.f;
+    m[2][2] = depth / 2.f;
+
+    return m;
 }
 
-Vec3f calculate_barycentric(Vec3f vertexA, Vec3f vertexB, Vec3f vertexC, Vec3f pointP) {
-    Vec3f crossVectors[2];
+Vec3f barycentric_coords(Vec3f A, Vec3f B, Vec3f C, Vec3f P) {
+    Vec3f s[2];
     for (int i = 2; i--; ) {
-        crossVectors[i][0] = vertexC[i] - vertexA[i];
-        crossVectors[i][1] = vertexB[i] - vertexA[i];
-        crossVectors[i][2] = vertexA[i] - pointP[i];
+        s[i][0] = C[i] - A[i];
+        s[i][1] = B[i] - A[i];
+        s[i][2] = A[i] - P[i];
     }
 
-    Vec3f crossProduct = crossVectors[0] ^ crossVectors[1];
+    Vec3f u = s[0] ^ s[1];
 
-    if (std::abs(crossProduct[2]) > 1e-2)
-        return Vec3f(1.f - (crossProduct.x + crossProduct.y) / crossProduct.z,
-            crossProduct.y / crossProduct.z,
-            crossProduct.x / crossProduct.z);
+    if (std::abs(u[2]) > 1e-2)
+        return Vec3f(1.f - (u.x + u.y) / u.z, u.y / u.z, u.x / u.z);
     return Vec3f(-1, 1, 1);
 }
 
-void render_triangle(Vec3i* screenVertices, Vec2f* textureCoords, Vec3f* vertexNormals,
-    float* depthBuffer, TGAImage& outputImage, Vec3f lightDirection) {
-    Vec2i minBounds(outputImage.get_width() - 1, outputImage.get_height() - 1);
-    Vec2i maxBounds(0, 0);
-    Vec2i imageBounds(outputImage.get_width() - 1, outputImage.get_height() - 1);
+void draw_triangle(Vec3i* vertices, Vec2f* tex_coords, Vec3f* normals, float* depth_buffer, TGAImage& image, Vec3f light_dir) {
+    Vec2i bboxmin(image.get_width() - 1, image.get_height() - 1);
+    Vec2i bboxmax(0, 0);
+    Vec2i clamp(image.get_width() - 1, image.get_height() - 1);
 
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 2; j++) {
-            minBounds[j] = std::max(0, std::min(minBounds[j], screenVertices[i][j]));
-            maxBounds[j] = std::min(imageBounds[j], std::max(maxBounds[j], screenVertices[i][j]));
+            bboxmin[j] = std::max(0, std::min(bboxmin[j], vertices[i][j]));
+            bboxmax[j] = std::min(clamp[j], std::max(bboxmax[j], vertices[i][j]));
         }
     }
 
-    Vec3f currentPixel;
-    for (currentPixel.x = minBounds.x; currentPixel.x <= maxBounds.x; currentPixel.x++) {
-        for (currentPixel.y = minBounds.y; currentPixel.y <= maxBounds.y; currentPixel.y++) {
-            Vec3f barycentricScreen = calculate_barycentric(
-                Vec3f(screenVertices[0].x, screenVertices[0].y, screenVertices[0].z),
-                Vec3f(screenVertices[1].x, screenVertices[1].y, screenVertices[1].z),
-                Vec3f(screenVertices[2].x, screenVertices[2].y, screenVertices[2].z),
-                currentPixel
+    Vec3f P;
+    for (P.x = bboxmin.x; P.x <= bboxmax.x; P.x++) {
+        for (P.y = bboxmin.y; P.y <= bboxmax.y; P.y++) {
+            Vec3f bc_screen = barycentric_coords(
+                Vec3f(vertices[0].x, vertices[0].y, vertices[0].z),
+                Vec3f(vertices[1].x, vertices[1].y, vertices[1].z),
+                Vec3f(vertices[2].x, vertices[2].y, vertices[2].z),
+                P
             );
 
-            if (barycentricScreen.x < 0 || barycentricScreen.y < 0 || barycentricScreen.z < 0)
+            if (bc_screen.x < 0 || bc_screen.y < 0 || bc_screen.z < 0)
                 continue;
 
-            currentPixel.z = screenVertices[0].z * barycentricScreen.x +
-                screenVertices[1].z * barycentricScreen.y +
-                screenVertices[2].z * barycentricScreen.z;
+            P.z = vertices[0].z * bc_screen.x + vertices[1].z * bc_screen.y + vertices[2].z * bc_screen.z;
 
-            int bufferIndex = (int)currentPixel.x + (int)currentPixel.y * SCREEN_WIDTH;
-            if (depthBuffer[bufferIndex] < currentPixel.z) {
-                depthBuffer[bufferIndex] = currentPixel.z;
+            int idx = (int)P.x + (int)P.y * width;
+            if (depth_buffer[idx] < P.z) {
+                depth_buffer[idx] = P.z;
 
-                // Интерполяция UV координат
-                Vec2f interpolatedUV;
-                interpolatedUV.x = textureCoords[0].x * barycentricScreen.x +
-                    textureCoords[1].x * barycentricScreen.y +
-                    textureCoords[2].x * barycentricScreen.z;
-                interpolatedUV.y = textureCoords[0].y * barycentricScreen.x +
-                    textureCoords[1].y * barycentricScreen.y +
-                    textureCoords[2].y * barycentricScreen.z;
+                //интерполяция UV координат
+                Vec2f uv;
+                uv.x = tex_coords[0].x * bc_screen.x + tex_coords[1].x * bc_screen.y + tex_coords[2].x * bc_screen.z;
+                uv.y = tex_coords[0].y * bc_screen.x + tex_coords[1].y * bc_screen.y + tex_coords[2].y * bc_screen.z;
 
-                // Интерполяция нормали
-                Vec3f interpolatedNormal;
-                interpolatedNormal.x = vertexNormals[0].x * barycentricScreen.x +
-                    vertexNormals[1].x * barycentricScreen.y +
-                    vertexNormals[2].x * barycentricScreen.z;
-                interpolatedNormal.y = vertexNormals[0].y * barycentricScreen.x +
-                    vertexNormals[1].y * barycentricScreen.y +
-                    vertexNormals[2].y * barycentricScreen.z;
-                interpolatedNormal.z = vertexNormals[0].z * barycentricScreen.x +
-                    vertexNormals[1].z * barycentricScreen.y +
-                    vertexNormals[2].z * barycentricScreen.z;
+                //интерполяция нормали
+                Vec3f normal;
+                normal.x = normals[0].x * bc_screen.x + normals[1].x * bc_screen.y + normals[2].x * bc_screen.z;
+                normal.y = normals[0].y * bc_screen.x + normals[1].y * bc_screen.y + normals[2].y * bc_screen.z;
+                normal.z = normals[0].z * bc_screen.x + normals[1].z * bc_screen.y + normals[2].z * bc_screen.z;
 
-                interpolatedNormal.make_unit();
+                normal.make_unit();
 
-                float lightIntensity = interpolatedNormal * lightDirection;
-                lightIntensity = std::max(0.0f, lightIntensity);
+                float intensity = normal * light_dir;
+                intensity = std::max(0.0f, intensity);
 
-                TGAColor textureColor = g_model->diffuse(interpolatedUV);
+                TGAColor color = model->diffuse(uv);
 
-                outputImage.set(currentPixel.x, currentPixel.y, TGAColor(
-                    static_cast<unsigned char>(textureColor.r * lightIntensity),
-                    static_cast<unsigned char>(textureColor.g * lightIntensity),
-                    static_cast<unsigned char>(textureColor.b * lightIntensity),
+                image.set(P.x, P.y, TGAColor(
+                    static_cast<unsigned char>(color.r * intensity),
+                    static_cast<unsigned char>(color.g * intensity),
+                    static_cast<unsigned char>(color.b * intensity),
                     255
                 ));
             }
@@ -117,81 +105,135 @@ void render_triangle(Vec3i* screenVertices, Vec2f* textureCoords, Vec3f* vertexN
     }
 }
 
+//загрузка фонового изображения
+bool load_background(const char* filename) {
+    if (!background.read_tga_file(filename)) {
+        std::cerr << "ошибка загрузки задника: " << filename << std::endl;
+        return false;
+    }
+    background.flip_vertically();
+
+    //масштабируем под размер экрана, если надобно
+    if (background.get_width() != width || background.get_height() != height) {
+        std::cerr << "размер изображения (" << background.get_width() << "x" << background.get_height()
+            << ") не соответсвует требуемуму разрешению (" << width << "x" << height << ")." << std::endl;
+    }
+
+    std::cerr << "успешная загрузка задника: " << filename << std::endl;
+    return true;
+}
+
+//функция для применения фона к изображению
+void apply_background(TGAImage& image) {
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            
+            TGAColor bg_pixel = background.get(x % background.get_width(), y % background.get_height());
+
+            TGAColor current_pixel = image.get(x, y);
+
+            if (current_pixel.r == 0 && current_pixel.g == 0 && current_pixel.b == 0) {
+                image.set(x, y, bg_pixel);
+            }
+        }
+    }
+}
+
 int main() {
-
     setlocale(LC_ALL, "rus");
-    g_model = new Model("african_head.obj");
+    model = new Model("african_head.obj");
 
-    if (!g_model->nfaces()) {
-        std::cerr << "\033[32m" << "не смогли загрузить модель..." << "\033[0m" << std::endl;
+    if (!model->nfaces()) {
+        std::cerr << "ошибка загрзки модели!" << std::endl;
         return -1;
     }
 
-    TGAImage outputImage(SCREEN_WIDTH, SCREEN_HEIGHT, TGAImage::RGB);
-
-    float* depthBuffer = new float[SCREEN_WIDTH * SCREEN_HEIGHT];
-    for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
-        depthBuffer[i] = -std::numeric_limits<float>::max();
+  
+    if (!load_background("background.tga")) {
+        std::cerr << "свистопляска без фона..." << std::endl;
     }
 
-    Camera renderCamera(
-        Vec3f(0, 0, 5),
+    TGAImage image(width, height, TGAImage::RGB);
+
+    //сначала применяем фон (если он загружен)
+    if (background.get_width() > 0 && background.get_height() > 0) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                image.set(x, y, background.get(x % background.get_width(), y % background.get_height()));
+            }
+        }
+    }
+    else {
+        //если фона нет, заливаем серым цветом
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                image.set(x, y, TGAColor(100, 100, 100, 255));
+            }
+        }
+    }
+
+    float* zbuffer = new float[width * height];
+    for (int i = 0; i < width * height; i++) {
+        zbuffer[i] = -std::numeric_limits<float>::max();
+    }
+
+   
+    Camera camera(
+        Vec3f(1, 1, 5),  
         Vec3f(0, 0, 0),
         Vec3f(0, 1, 0)
     );
 
-    Matrix viewMatrix = renderCamera.get_view_matrix();
-    Matrix projectionMatrix = renderCamera.get_projection_matrix();
-    Matrix viewportMatrix = create_viewport_matrix(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    Matrix View = camera.get_view_matrix();
+    Matrix Projection = camera.get_projection_matrix();
+    Matrix ViewPort = create_viewport(0, 0, width, height);
 
-    Vec3f lightDirection(0, 1, 1);
-    lightDirection.make_unit();
+    Vec3f light_dir(1, 1, 1);
+    light_dir.make_unit();
 
-    std::cerr << "\033[32m" << "рендеринг в процессе:  " << g_model->nfaces() << " грани..." << "\033[0m" << std::endl;
+    std::cerr << "рендерим " << model->nfaces() << " грани..." << std::endl;
 
-    for (int faceIndex = 0; faceIndex < g_model->nfaces(); faceIndex++) {
-        std::vector<int> currentFace = g_model->face(faceIndex);
-        std::vector<int> currentUV = g_model->face_uv(faceIndex);
-        std::vector<int> currentNormals = g_model->face_norm(faceIndex);
+    // рендерим модель поверх фона
+    for (int i = 0; i < model->nfaces(); i++) {
+        std::vector<int> face = model->face(i);
+        std::vector<int> face_uv = model->face_uv(i);
+        std::vector<int> face_norm = model->face_norm(i);
 
-        Vec3i screenCoordinates[3];
-        Vec2f uvCoordinates[3];
-        Vec3f normalVectors[3];
+        Vec3i screen_coords[3];
+        Vec2f uv_coords[3];
+        Vec3f normals[3];
 
-        for (int vertexIndex = 0; vertexIndex < 3; vertexIndex++) {
-            Vec3f worldVertex = g_model->vert(currentFace[vertexIndex]);
+        for (int j = 0; j < 3; j++) {
+            Vec3f v = model->vert(face[j]);
 
-            Matrix homogeneousVertex = to_homogeneous(worldVertex);
-            Matrix clipSpace = multiply_matrices(viewportMatrix,
-                multiply_matrices(projectionMatrix,
-                    multiply_matrices(viewMatrix, homogeneousVertex)));
-            Vec3f screenSpace = from_homogeneous(clipSpace);
+            Matrix v4 = to_homogeneous(v);
+            Matrix clip = multiply_matrices(ViewPort, multiply_matrices(Projection, multiply_matrices(View, v4)));
+            Vec3f screenf = from_homogeneous(clip);
 
-            screenCoordinates[vertexIndex] = Vec3i(
-                static_cast<int>(screenSpace.x),
-                static_cast<int>(screenSpace.y),
-                static_cast<int>(screenSpace.z)
+            screen_coords[j] = Vec3i(
+                static_cast<int>(screenf.x),
+                static_cast<int>(screenf.y),
+                static_cast<int>(screenf.z)
             );
 
-            uvCoordinates[vertexIndex] = g_model->uv(currentUV[vertexIndex]);
-            normalVectors[vertexIndex] = g_model->norm(currentNormals[vertexIndex]);
+            uv_coords[j] = model->uv(face_uv[j]);
+            normals[j] = model->norm(face_norm[j]);
         }
 
-        render_triangle(screenCoordinates, uvCoordinates, normalVectors,
-            depthBuffer, outputImage, lightDirection);
+        draw_triangle(screen_coords, uv_coords, normals, zbuffer, image, light_dir);
     }
 
-    outputImage.flip_vertically();
+    image.flip_vertically();
 
-    if (outputImage.write_tga_file("output.tga")) {
-        std::cerr << "\033[32m" << "готово!" << "\033[0m" << std::endl;
+    if (image.write_tga_file("output_with_background.tga")) {
+        std::cerr << "всё успешно сохранено в output_with_background.tga" << std::endl;
     }
     else {
-        std::cerr << "\033[32m" << "ошибка сохранения" << "\033[0m" << std::endl;
+        std::cerr << "ошибка загрузки" << std::endl;
     }
 
-    delete[] depthBuffer;
-    delete g_model;
+    delete[] zbuffer;
+    delete model;
 
     return 0;
 }
