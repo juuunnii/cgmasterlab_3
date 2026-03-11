@@ -1,0 +1,116 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (openglathome.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  model.cpp
+  house_of_openGL.cpp
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(61,36): warning C4244: =: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(61,36): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(61,36): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(61,36): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(61,36): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(61,36): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(61,36): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(61,36): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(61,36): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(62,40): warning C4244: =: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(62,40): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(62,40): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(62,40): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(62,40): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(62,40): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(62,40): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(62,40): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(62,40): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,82): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,82): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,82): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,82): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,82): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,82): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,82): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,82): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,82): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,61): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,61): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,61): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,61): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,61): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,61): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,61): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,61): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,61): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,40): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,40): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,40): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,40): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,40): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,40): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,40): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,40): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(64,40): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,82): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,82): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,82): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,82): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,82): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,82): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,82): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,82): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,82): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,61): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,61): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,61): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,61): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,61): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,61): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,61): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,61): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,61): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,40): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,40): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,40): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,40): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,40): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,40): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,40): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,40): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(65,40): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,82): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,82): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,82): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,82): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,82): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,82): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,82): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,82): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,82): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,61): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,61): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,61): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,61): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,61): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,61): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,61): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,61): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,61): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,40): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,40): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,40): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,40): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,40): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,40): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,40): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,40): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(66,40): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(109,61): warning C4244: аргумент: преобразование "t" в "int", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(109,61): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(109,61): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(109,61): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(109,61): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(109,45): warning C4244: аргумент: преобразование "t" в "int", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(109,45): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(109,45): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(109,45): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_master_lab_3\house_of_openGL\house_of_openGL.cpp(109,45): warning C4244:         ]
+  tgaimage.cpp
+  Создание кода...
+  LINK : не найден или не выполнена сборка C:\Users\User\Desktop\с++ exp\cg_master_lab_3\x64\Debug\house_of_openGL.exe при последней инкрементной компоновке; выполняется полная компоновка
+  house_of_openGL.vcxproj -> C:\Users\User\Desktop\с++ exp\cg_master_lab_3\x64\Debug\house_of_openGL.exe

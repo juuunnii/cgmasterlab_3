@@ -1,0 +1,25 @@
+﻿  model.cpp
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,53): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,53): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,53): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,53): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,53): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,53): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,53): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,53): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,53): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,20): warning C4244: аргумент: преобразование "t" в "t", возможна потеря данных
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,20): warning C4244:         with
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,20): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,20): warning C4244:             t=float
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,20): warning C4244:         ]
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,20): warning C4244:         and
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,20): warning C4244:         [
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,20): warning C4244:             t=int
+C:\Users\User\Desktop\с++ exp\cg_masterlab3\House_of_openGL\house_of_openGL\model.cpp(85,20): warning C4244:         ]
+  openglathome.cpp
+\openglathome.cpp(1,1): error C1083: Не удается открыть файл источник: openglathome.cpp: No such file or directory,
+  (компиляция исходного файла "/openglathome.cpp")
+  
+  tgaimage.cpp
+  Создание кода...
