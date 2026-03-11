@@ -140,7 +140,8 @@ void apply_background(TGAImage& image) {
 }
 
 int main() {
-    setlocale(LC_ALL, "rus");
+    setlocale(LC_ALL, "ru_RU.UTF-8");
+    std::locale::global(std::locale("ru_RU.UTF-8"));
     model = new Model("african_head.obj");
 
     if (!model->nfaces()) {
@@ -237,3 +238,4 @@ int main() {
 
     return 0;
 }
+
